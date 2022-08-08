@@ -12,11 +12,28 @@ const images = [
     alt: "Group of Horses Running",
   },
 ];
-const htmlString = images.reduce((acc, image) => {
-  return (
-    acc +
-    `<li><img class="gallery__image" src="${image.url}" alt="${image.alt}" /></li>`
-  );
-}, "");
+const imagesContainer = document.querySelector('.gallery');
+console.log(imagesContainer);
 
-document.querySelector(".gallery").insertAdjacentHTML("afterbegin", htmlString);
+const makeGalery = ({url, alt}) => {
+
+  return `
+  <li class="galery-item">
+  <img src="${url}" alt="${alt}" class="galery-img width="450px" height="300px">
+  </li>
+  `
+}
+
+console.log(images);
+console.log(makeGalery(images[0]));
+
+
+const makeImgGalery = images
+  .map(makeGalery)
+  .join(' ');
+
+
+console.log(makeImgGalery);
+
+imagesContainer.insertAdjacentHTML('beforeend', makeImgGalery);
+
